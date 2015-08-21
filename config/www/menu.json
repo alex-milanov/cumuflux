@@ -1,14 +1,19 @@
 {
 	"left": [
 		{
-			"title": "About",
+			"title": "Projection",
 			"access": ["anon","user"],
-			"uiSref": "about"
+			"uiSref": "projection"
 		},
 		{
-			"title": "Articles",
-			"access": ["admin"],
-			"uiSref": "admin.articles"
+			"title": "Accounts",
+			"access": ["anon","user"],
+			"uiSref": "accounts"
+		},
+		{
+			"title": "Transactions",
+			"access": ["anon","user"],
+			"uiSref": "transactions"
 		},
 		{
 			"title": "Users",
