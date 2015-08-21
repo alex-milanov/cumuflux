@@ -1,0 +1,17 @@
+ion-view(view-title="REST Test")
+	ion-content
+		.list.card
+			label.item.item-input
+				span.input-label URI
+				input(type="text",ng-model="rest.uri")
+			label.item.item-input
+				span.input-label PORT
+				input(type="text",ng-model="rest.port")
+			label.item.item-input
+				span.input-label PATH
+				input(type="text",ng-model="rest.path")
+			button.button.button-balanced.button-block(ng-click="get(rest)") GET
+		.list.card
+			div.item.item-divider RESULT
+			div.item.item-body {{ rest.result }}
+		

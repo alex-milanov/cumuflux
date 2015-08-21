@@ -1,0 +1,48 @@
+{
+  "name": "cumuflux",
+  "version": "0.1.0",
+  "description": "accumulative cashflow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "chalk": "^1.0.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "~0.4.1",
+    "cookie-parser": "~1.3.2",
+    "express": "^4.12.4",
+    "express-jwt": "^3.0.1",
+    "express-session": "~1.9.1",
+    "iblokz-node-restify": "git://github.com/iblokz/node-restify",
+    "jade": "^1.10.0",
+    "jsonwebtoken": "^5.0.4",
+    "lodash": "^3.9.3",
+    "method-override": "^2.3.3",
+    "moment": "^2.10.3",
+    "mongoose": "~3.8.8",
+    "mongoose-timestamp": "^0.4.0",
+    "morgan": "^1.5.3",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "del": "^1.2.0",
+    "event-stream": "^3.3.1",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.2.0",
+    "gulp-filter": "^2.0.2",
+    "gulp-jade": "^1.0.1",
+    "gulp-minify-css": "^0.3.0",
+    "gulp-nodemon": "^2.0.3",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^1.3.3",
+    "gulp-util": "^2.2.14",
+    "main-bower-files": "^2.8.0",
+    "shelljs": "^0.3.0"
+  }
+}

@@ -1,0 +1,36 @@
+{
+	"left": [
+		{
+			"title": "About",
+			"access": ["anon","user"],
+			"uiSref": "about"
+		},
+		{
+			"title": "Articles",
+			"access": ["admin"],
+			"uiSref": "admin.articles"
+		},
+		{
+			"title": "Users",
+			"access": ["admin"],
+			"uiSref": "admin.users"
+		}
+	],
+	"right": [
+		{
+			"title": "My Profile",
+			"uiSref": "user.profile",
+			"access": ["admin","user"]
+		},
+		{
+			"title": "Login / Register",
+			"access": ["anon"],
+			"uiSref": "login"
+		},
+		{
+			"title": "Logout",
+			"access": ["admin","user"],
+			"ngClick": "logout"
+		}
+	] 
+}

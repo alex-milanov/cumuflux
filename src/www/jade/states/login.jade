@@ -1,0 +1,29 @@
+h2 Login
+
+section.content(ng-init="user={}")
+	ul.nav.nav-pills(data-ng-init="loginBoxTab=1")
+		li(data-ng-class="(loginBoxTab==1)?'active':''")
+			a(data-ng-click="loginBoxTab=1") Login
+		li(data-ng-class="(loginBoxTab==2)?'active':''")
+			a(data-ng-click="loginBoxTab=2") Register
+	br
+	//-form(ng-init="user={}")
+	form(data-ng-if="loginBoxTab==1")
+		.form-group
+			label Email
+			input.form-control(type='text',name='email',data-ng-model='user.email')
+		.form-group
+			label Password
+			input.form-control(type='password',name='password',data-ng-model='user.password')
+		button.btn.btn-default(type='button',data-ng-click='login(user)') Login
+	form(data-ng-if="loginBoxTab==2")
+		.form-group
+			label Full Name
+			input.form-control(type='text',name='name',data-ng-model='user.name')
+		.form-group
+			label Email
+			input.form-control(type='text',name='email',data-ng-model='user.email')
+		.form-group
+			label Password
+			input.form-control(type='password',name='password',data-ng-model='user.password')
+		button.btn.btn-default(type='submit',data-ng-click='register(user)') Register

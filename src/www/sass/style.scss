@@ -1,0 +1,12 @@
+@import "overrides/font-awesome";
+
+@import "../../common/sass/vars";
+
+body {
+	font-family: $hybrid-text-font;
+	color: $hybrid-text-color;
+}
+
+a {
+	cursor: pointer;
+}
