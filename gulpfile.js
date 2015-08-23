@@ -94,7 +94,7 @@ gulp.task('nodemon', function () {
 	nodemon({
 		script: 'index.js',
 		ext: 'js json',
-		ignore: ["src/*","www/*","mobile/*"],
+		ignore: ["src/*","dist/*"],
 		env: { 'NODE_ENV': 'development' }
 	})
 })
