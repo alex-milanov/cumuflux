@@ -6,12 +6,43 @@ html
 	body
 		
 		h1 CumuFlux - Personal Finances App
+
+		h3 Transactions Crud
+		table.table.transactions-crud
+			thead: tr
+				th Type
+				th Title
+				th Occuring
+				th Amount
+				th Actions
+			tbody
+			tfoot: form
+				th: select(name="type")
+					option(value="expense") Expense
+					option(value="income") Income
+				th: input(name="title")
+				th: select(name="occuring")
+					option(value="once") Once
+					option(value="daily") Daily
+					option(value="weekly") Weekly
+					option(value="monthly") Monthly
+				th: input(name="amount")
+				th.actions
+					button(type="submit") Save
+					button(type="button") Reset
 		
 		//- lib
 		script(src="lib/jquery.js")
 		script(src="lib/lodash.js")
 		script(src="lib/moment.js")
 		script(src="lib/q.js")
+
+		//- iblokz
+		script(src="js/iblokz/resource.js")
+		script(src="js/iblokz/element.js")
+		script(src="js/iblokz/crud.js")
 		
 		//- app
-		script(src="js/app.js")
+		script(src="js/cmf/elements/transactions-crud.js")
+		script(src="js/cmf/index.js")
+		script(src="js/init.js")
