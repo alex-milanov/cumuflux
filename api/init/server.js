@@ -87,6 +87,10 @@ module.exports = function(config, db){
 	// TODO - move this logic to different ports for www && ionic
 	app.use(express.static(config.path.static));
 
+	app.use(require('connect-livereload')({
+		port: 35729
+	}));
+
 	/*
 	fileUtil.walk('./app/middleware', /(.*)\.(js$|coffee$)/).forEach(function(middlewarePath) {
 		require(path.resolve(middlewarePath))(app);

@@ -11,7 +11,7 @@ var _path = {
 	api: path.join(rootPath,'api'),
 	models: path.join(rootPath,'api','models'),
 	routes: path.join(rootPath,'api','routes'),
-	static: path.join(rootPath,'www')
+	static: path.join(rootPath,'dist')
 }
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
 	},
 	root: rootPath,
 	path: _path,
-	port: process.env.PORT || 3000,
+	port: process.env.PORT || 8080,
 	templateEngine: 'jade',
 	sessionSecret: 'tumbalumbapickachu',
 	// The name of the MongoDB collection to store sessions in
