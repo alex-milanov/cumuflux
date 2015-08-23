@@ -2,7 +2,7 @@
 
 module.exports = {
 	db: {
-		uri: 'mongodb://localhost/hybrid-newsfeed',
+		uri: 'mongodb://localhost/cumuflux-dev',
 		options: {
 			user: '',
 			pass: ''
