@@ -6,7 +6,11 @@ if(typeof cmf.elements === "undefined"){ cmf.elements = {}; }
 cmf.elements.TransactionsCrud = function(dom, context){
 	iblokz.Crud.call(this, dom, context);
 
-	this.resource = new iblokz.Resource("/api/transactions");
+	
+	this._context.defaultItem = {
+		type: "expense",
+		occuring: "once"
+	};
 }
 
 cmf.elements.TransactionsCrud.prototype = Object.create( iblokz.Crud );
@@ -14,40 +18,45 @@ cmf.elements.TransactionsCrud.prototype.constructor = cmf.elements.TransactionsC
 
 cmf.elements.TransactionsCrud.prototype.list = function(){
 	
+
 	var crud = this;
 
-	console.log(crud._domTbody);
+	return iblokz.Crud.prototype.list.call(this).then(function(){
+		crud._domTbody.html("");
 
-	crud._domTbody.html("");
+		crud._context.list.forEach(function(item){
+			
+			var domRow = $("<tr></tr>");
+			domRow.append($("<td></td>").html(item.type));
+			domRow.append($("<td></td>").html(item.title));
+			domRow.append($("<td></td>").html(item.occuring));
+			domRow.append($("<td></td>").html(item.amount));
 
-	crud._context.list.forEach(function(item){
-		
-		var domRow = $("<tr></tr>");
-		domRow.append($("<td></td>").html(item.type));
-		domRow.append($("<td></td>").html(item.title));
-		domRow.append($("<td></td>").html(item.occuring));
-		domRow.append($("<td></td>").html(item.amount));
+			domRow.append(
+				$("<td></td>").addClass("actions")
+					.append($("<button></button>").text("Edit")
+						.addClass("crud-edit-trigger")
+						.attr("type","button")
+						.attr("data-trigger-id",item._id)
+						.attr("data-trigger-method","edit")
+					)
+					.append($("<button></button>").text("Delete")
+						.addClass("crud-delete-trigger")
+						.attr("type","button")
+						.attr("data-trigger-id",item._id)
+						.attr("data-trigger-method","delete")
+					)
+			);
 
-		domRow.append(
-			$("<td></td>").addClass("actions")
-				.append($("<button></button>").text("Edit").addClass("transaction-edit").attr("data-id",item.id))
-				.append($("<button></button>").text("Delete").addClass("transaction-delete").attr("data-id",item.id))
-		);
-
-
-
-		crud._domTbody.append(domRow);
+			crud._domTbody.append(domRow);
+		})
 	})
 }
 
 cmf.elements.TransactionsCrud.prototype.init = function(){
-	iblokz.Crud.prototype.init.call(this);
 
-	var crud = this;
+	this._resource = new iblokz.Resource("/api/transactions");
 
-	return this.resource.query().then(function(result){
-		crud._context.list = result.list;
-		crud.list();
-	})
+	return iblokz.Crud.prototype.init.call(this);
 
 }
