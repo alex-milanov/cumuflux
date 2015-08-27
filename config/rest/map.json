@@ -9,6 +9,11 @@
 				"title" : "String",
 				"type" : {"type": "String", "default": "expense"},
 				"occuring" : {"type": "String", "default": "once"},
+				"recurrence" : {
+					"startingAt": "Date",
+					"dayOfMonth": "Number",
+					"dayOfWeek": "Number"
+				},
 				"amount" : {"type": "Number"},
 				"createdAt" : {"type": "Date", "default": "Date.now"},
 				"createdBy" : { "type": "ObjectId", "ref":"User", "required": false}

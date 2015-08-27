@@ -11,9 +11,30 @@ cmf.elements.TransactionsCrud = function(dom, context){
 		type: "expense",
 		occuring: "once"
 	};
+
+	var crud = this;
+
+	var crudContextEdit = crud._context.edit;
+	var crudContextReset = crud._context.reset;
+
+	crud._context.reset = function(){
+		crudContextReset();
+		crud._domForm.find("[name='recurrence.startingAt']").val("")
+		crud._domForm.find("[name='recurrence.dayOfWeek']").val("");
+		crud._domForm.find("[name='recurrence.dayOfMonth']").val("");
+		crud._domForm.find("select[name=occuring]").change();
+	}
+
+	crud._context.edit = function(_id){
+		crud._context.reset();
+		return crudContextEdit(_id).then(function(){
+			crud._domForm.find("select[name=occuring]").change();
+		})
+	}
+
 }
 
-cmf.elements.TransactionsCrud.prototype = Object.create( iblokz.Crud );
+cmf.elements.TransactionsCrud.prototype = Object.create( iblokz.Crud.prototype );
 cmf.elements.TransactionsCrud.prototype.constructor = cmf.elements.TransactionsCrud;
 
 cmf.elements.TransactionsCrud.prototype.list = function(){
@@ -55,8 +76,35 @@ cmf.elements.TransactionsCrud.prototype.list = function(){
 
 cmf.elements.TransactionsCrud.prototype.init = function(){
 
-	this._resource = new iblokz.Resource("/api/transactions");
+	this._resource = new cmf.resources.Transactions("/api/transactions");
+	console.log(this._resource);
 
-	return iblokz.Crud.prototype.init.call(this);
+	var crud = this;
+
+	return iblokz.Crud.prototype.init.call(this).then(function(){
+		crud._domForm.find("[name='recurrence.startingAt'],[name='recurrence.dayOfWeek'],[name='recurrence.dayOfMonth']").hide();
+		crud._domForm.on("change","select[name=occuring]",function(event){
+			console.log($(this).val());
+			switch($(this).val()){
+				default:
+					crud._domForm.find("[name='recurrence.startingAt'],[name='recurrence.dayOfWeek'],[name='recurrence.dayOfMonth']").hide();
+					break;
+				case "daily":
+					crud._domForm.find("[name='recurrence.startingAt']").show();
+					crud._domForm.find("[name='recurrence.dayOfWeek'],[name='recurrence.dayOfMonth']").hide();
+					break;
+				case "weekly":
+					crud._domForm.find("[name='recurrence.startingAt'],[name='recurrence.dayOfWeek']").show();
+					crud._domForm.find("[name='recurrence.dayOfMonth']").hide();
+					break;
+				case "monthly":
+					crud._domForm.find("[name='recurrence.startingAt'],[name='recurrence.dayOfMonth']").show();
+					crud._domForm.find("[name='recurrence.dayOfWeek']").hide();
+					break;
+			}
+		})
+	})
+
+	
 
 }

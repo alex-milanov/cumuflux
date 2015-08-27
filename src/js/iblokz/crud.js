@@ -19,13 +19,11 @@ iblokz.Crud = function(dom, context){
 	this._context.edit = function(_id){
 		var context = crud._context;
 		var resource = crud._resource;
-		resource.view(_id).then(function(item){
+		return resource.view(_id).then(function(item){
 			context.item = item;
 			for(var key in item){
-				var formEl = crud._domForm.find("[name="+key+"]");
-				
+				var formEl = crud._domForm.find("[name='"+key+"']");
 				formEl.val(item[key]);
-				
 			}
 		})
 	}
@@ -41,7 +39,7 @@ iblokz.Crud = function(dom, context){
 	this._context.delete = function(_id){
 		var context = crud._context;
 		var resource = crud._resource;
-		resource.delete(_id).then(function(){
+		return resource.delete(_id).then(function(){
 			console.log("Deleted "+_id+" successfuly!");
 			crud.list();
 		})
