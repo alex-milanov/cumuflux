@@ -26,8 +26,8 @@ var paths = {
 };
 
 // additional, not recognized bower files
-// bowerFiles
-// 	.push("./src/lib/threex.keyboardstate/threex.keyboardstate.js");
+bowerFiles
+	.push("./src/lib/jade/jade.js");
 
 gulp.task('sass', function(done) {
 	// www
@@ -49,14 +49,23 @@ gulp.task('sass', function(done) {
 gulp.task('jade', function(done) {
 	// TODO: get from config
 	var YOUR_LOCALS = {};
-	gulp.src('./src/jade/**/*.jade')
-		.pipe(jade({
-			locals: YOUR_LOCALS,
-			pretty: true
-		}))
-		.pipe(gulp.dest('./dist/'))
-		.pipe( livereload())
-		.on('end',done);
+
+	var filterForViews = gulpFilter(['*','!views/']);
+	
+	del([
+		'./dist/views/**/*'
+	], function(){
+		gulp.src('./src/jade/**/*.jade')
+			.pipe(filterForViews)
+			.pipe(jade({
+				locals: YOUR_LOCALS,
+				pretty: true
+			}))
+			.pipe(filterForViews.restore())
+			.pipe(gulp.dest('./dist/'))
+			.pipe( livereload())
+			.on('end',done);
+	});
 });
 
 
