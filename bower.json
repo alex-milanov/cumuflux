@@ -16,11 +16,12 @@
     "tests"
   ],
   "dependencies": {
+    "clndr": "~1.2.16",
     "font-awesome": "~4.3.0",
+    "jade": "~1.11.0",
+    "jquery": "~2.1.4",
     "lodash": "~3.9.3",
     "moment": "~2.10.3",
-    "q": "1.x",
-    "jquery": "~2.1.4",
-    "clndr": "~1.2.16"
+    "q": "1.x"
   }
 }

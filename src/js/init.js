@@ -10,18 +10,21 @@ $(document).ready(function() {
 		.addRoute({
 			"url": "/",
 			"default": true,
-			"callback": function(){
-				var deferred = Q.defer();
-				console.log("Hello World!");
-				deferred.resolve();
-				return deferred.promise;
-			}
+			"view": "views/home.jade",
+			"container": "section.content",
 		})
 		.addRoute({
 			"url": "/transactions",
+			"view": "views/transactions.jade",
+			"container": "section.content",
 			"callback": function(){
 				return transactions.init();
 			}
+		})
+		.addRoute({
+			"url": "/projections",
+			"view": "views/projections.jade",
+			"container": "section.content",
 		})
 
 	router.init();

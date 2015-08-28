@@ -26,11 +26,12 @@ iblokz.Router = function(){
 				if(route.view && route.container){
 					if(route.callback){
 						currentStepPromise = function(){
-							return route.callback(route.view, route.container);
+							return iblokz.helpers.displayWithJade(route.container,route.view,{})
+								.then(route.callback);
 						}
 					} else {
 						currentStepPromise = function(){
-							return helpers.displayWithJade(route.container,route.view,{});
+							return iblokz.helpers.displayWithJade(route.container,route.view,{});
 						}
 					}
 				} else if (route.callback){	

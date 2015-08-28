@@ -1,0 +1,31 @@
+
+h3 Transactions Crud
+.transactions-crud
+	form(method="POST")
+		table.table
+			thead: tr
+				th(width="120") Type
+				th Title
+				th(width="250") Occuring (Next)
+				th(width="120") Amount
+				th(width="200") Actions
+			tbody
+			tfoot
+				input(type="hidden",name="_id",value="")
+				th(width="120"): select(name="type")
+					option(value="expense") Expense
+					option(value="income") Income
+				th: input(name="title")
+				th(width="250")
+					select(name="occuring")
+						option(value="once") Once
+						option(value="daily") Daily
+						option(value="weekly") Weekly
+						option(value="monthly") Monthly
+					input(name="recurrence.startingAt",type="date")
+					input(name="recurrence.dayOfMonth",placeholder="Day Of Month",type="number")
+					input(name="recurrence.dayOfWeek",placeholder="Day Of Week",type="number")
+				th(width="120"): input(name="amount")
+				th(width="200").actions
+					button(type="submit") Save
+					button.crud-reset-trigger(type="button",data-trigger-method="reset") Reset
