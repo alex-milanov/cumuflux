@@ -9,8 +9,8 @@
 				"title" : "String",
 				"type" : {"type": "String", "default": "expense"},
 				"occuring" : {"type": "String", "default": "once"},
+				"occuredAt": "Date",
 				"recurrence" : {
-					"startingAt": "Date",
 					"dayOfMonth": "Number",
 					"dayOfWeek": "Number"
 				},

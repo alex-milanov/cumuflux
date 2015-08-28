@@ -27,7 +27,6 @@ cmf.elements.Projections.prototype.init = function(){
 
 
 		result.list.forEach(function(item){
-			console.log(item);
 			switch(item.occuring){
 				case "weekly":
 					if(item.next >= moment().day(1).add(1, 'weeks') && item.next <= moment().day(7).add(1, 'weeks')){
@@ -37,10 +36,20 @@ cmf.elements.Projections.prototype.init = function(){
 					break;
 				case "monthly":
 					if(item.next) {
-						if(item.next >= moment().day(1).add(1, 'weeks') && item.next <= moment().day(7).add(1, 'weeks')){
+						if(item.next >= moment().day(1).add(1, 'weeks').startOf('day') && item.next <= moment().day(7).add(1, 'weeks').startOf('day')){
 							nextWeekAmount += item.amount;
 						}
-						if(item.next >= moment().set('date',1).add(1, 'months') && item.next < moment().set('date',1).add(2, 'months')){
+						if(item.next >= moment().set('date',1).add(1, 'months').startOf('day') && item.next < moment().set('date',1).add(2, 'months').startOf('day')){
+							nextMonthAmount += item.amount;
+						}
+					}
+					break;
+				case "once":
+					if(item.occuredAt) {
+						if(item.occuredAt >= moment().day(1).add(1, 'weeks').startOf('day') && item.occuredAt <= moment().day(7).add(1, 'weeks').startOf('day')){
+							nextWeekAmount += item.amount;
+						}
+						if(item.occuredAt >= moment().set('date',1).add(1, 'months').startOf('day') && item.occuredAt < moment().set('date',1).add(2, 'months').startOf('day')){
 							nextMonthAmount += item.amount;
 						}
 					}

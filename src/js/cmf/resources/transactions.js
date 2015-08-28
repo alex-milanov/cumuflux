@@ -15,6 +15,9 @@ cmf.resources.Transactions.prototype.query = function(queryParams){
 	return iblokz.Resource.prototype.query.call(this, queryParams).then(function(result){
 		
 		result.list.forEach(function(item, index){
+			if(item.occuredAt)
+				item.occuredAt = moment(item.occuredAt);
+
 			switch(item.occuring){
 				case 'monthly':
 					if(item.recurrence && item.recurrence.dayOfMonth){
@@ -33,6 +36,9 @@ cmf.resources.Transactions.prototype.query = function(queryParams){
 				case 'daily':
 					item.next = moment().add(1,'days');
 					break;
+				case 'once':
+					item.next = moment(item.occuredAt);
+					break;
 			}
 			
 
@@ -46,14 +52,15 @@ cmf.resources.Transactions.prototype.query = function(queryParams){
 cmf.resources.Transactions.prototype.preSave = function(data){
 
 	data.recurrence = {
-		startingAt: data["recurrence.startingAt"] || Date.now(),
 		dayOfMonth: data["recurrence.dayOfMonth"] || 1,
 		dayOfWeek: data["recurrence.dayOfWeek"] || 1,
 	}
 
-	delete(data["recurrence.startingAt"]);
 	delete(data["recurrence.dayOfMonth"]);
 	delete(data["recurrence.dayOfWeek"]);
+
+
+	data.occuredAt = data.occuredAt || Date.now();
 
 	return data;
 }
@@ -75,8 +82,8 @@ cmf.resources.Transactions.prototype.view = function(id){
 		}
 		delete(data.recurrence);
 
-		if(data['recurrence.startingAt']){
-			data['recurrence.startingAt'] = moment(data['recurrence.startingAt']).format("YYYY-MM-DD");
+		if(data['occuredAt']){
+			data['occuredAt'] = moment(data['occuredAt']).format("YYYY-MM-DD");
 		}
 		return data;
 	})
