@@ -8,9 +8,9 @@ html
 		header
 			h1 CumuFlux - Personal Finances App
 			ul.main-menu
-				li: a Home
-				li.active: a Transactions
-				li: a Projections
+				li: a(href="#/") Home
+				li.active: a(href="#/transactions") Transactions
+				li: a(href="#/projections") Projections
 
 		h3 Transactions Crud
 		.transactions-crud
@@ -53,6 +53,7 @@ html
 		script(src="js/iblokz/resource.js")
 		script(src="js/iblokz/element.js")
 		script(src="js/iblokz/crud.js")
+		script(src="js/iblokz/router.js")
 		
 		//- app
 		script(src="js/cmf/resources/transactions.js")

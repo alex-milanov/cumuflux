@@ -76,6 +76,7 @@ iblokz.Crud.prototype.constructor = iblokz.Crud;
 
 iblokz.Crud.prototype.list = function(){
 	var crud = this;
+	//console.log("crud.list")
 	return this._resource.query()
 		.then(function(result){
 			crud._context.list = result.list;
@@ -83,6 +84,8 @@ iblokz.Crud.prototype.list = function(){
 }
 
 iblokz.Crud.prototype.init = function(){
+
+	//console.log("crud.init");
 
 	iblokz.Element.prototype.init.call(this);
 

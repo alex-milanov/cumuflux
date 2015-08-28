@@ -42,6 +42,8 @@ cmf.elements.TransactionsCrud.prototype.list = function(){
 
 	var crud = this;
 
+	//console.log("transactions.list");
+
 	return iblokz.Crud.prototype.list.call(this).then(function(){
 		crud._domTbody.html("");
 
@@ -77,14 +79,15 @@ cmf.elements.TransactionsCrud.prototype.list = function(){
 cmf.elements.TransactionsCrud.prototype.init = function(){
 
 	this._resource = new cmf.resources.Transactions("/api/transactions");
-	console.log(this._resource);
+	
 
 	var crud = this;
+
+	//console.log("transactions.init");
 
 	return iblokz.Crud.prototype.init.call(this).then(function(){
 		crud._domForm.find("[name='recurrence.startingAt'],[name='recurrence.dayOfWeek'],[name='recurrence.dayOfMonth']").hide();
 		crud._domForm.on("change","select[name=occuring]",function(event){
-			console.log($(this).val());
 			switch($(this).val()){
 				default:
 					crud._domForm.find("[name='recurrence.startingAt'],[name='recurrence.dayOfWeek'],[name='recurrence.dayOfMonth']").hide();

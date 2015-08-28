@@ -9,9 +9,4 @@ cmf.App = function(){
 
 cmf.App.prototype.init = function(){
 	console.log("Hello World");
-
-	this.transactions = new cmf.elements.TransactionsCrud(".transactions-crud");
-
-	this.transactions.init();
-
 }
