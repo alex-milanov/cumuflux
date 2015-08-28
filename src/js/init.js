@@ -4,7 +4,6 @@ $(document).ready(function() {
 	var router = new iblokz.Router();
 	
 
-	var transactions = new cmf.elements.TransactionsCrud(".transactions-crud");
 
 	router
 		.addRoute({
@@ -18,6 +17,7 @@ $(document).ready(function() {
 			"view": "views/transactions.jade",
 			"container": "section.content",
 			"callback": function(){
+				var transactions = new cmf.elements.TransactionsCrud(".transactions-crud");
 				return transactions.init();
 			}
 		})
@@ -25,6 +25,10 @@ $(document).ready(function() {
 			"url": "/projections",
 			"view": "views/projections.jade",
 			"container": "section.content",
+			"callback": function(){
+				var projections = new cmf.elements.Projections(".projections");
+				return projections.init();
+			}
 		})
 
 	router.init();

@@ -4,9 +4,10 @@ if(typeof cmf === "undefined"){ var cmf = {}; }
 if(typeof cmf.elements === "undefined"){ cmf.elements = {}; }
 
 cmf.elements.TransactionsCrud = function(dom, context){
+	
+
 	iblokz.Crud.call(this, dom, context);
 
-	
 	this._context.defaultItem = {
 		type: "expense",
 		occuring: "once"
@@ -48,6 +49,12 @@ cmf.elements.TransactionsCrud.prototype.list = function(){
 		crud._domTbody.html("");
 
 		crud._context.list.forEach(function(item){
+
+			// format next
+			if(item.next)
+				item.next = item.next.format("ll");
+			else
+				item.next = 'n/a';
 			
 			var domRow = $("<tr></tr>");
 			domRow.append($("<td></td>").html(item.type));

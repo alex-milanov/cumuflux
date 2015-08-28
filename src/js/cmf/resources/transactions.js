@@ -34,11 +34,7 @@ cmf.resources.Transactions.prototype.query = function(queryParams){
 					item.next = moment().add(1,'days');
 					break;
 			}
-			// format it
-			if(item.next)
-				item.next = item.next.format("ll");
-			else
-				item.next = 'n/a';
+			
 
 		})
 
