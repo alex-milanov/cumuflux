@@ -50,7 +50,7 @@ cmf.elements.TransactionsCrud.prototype.list = function(){
 			var domRow = $("<tr></tr>");
 			domRow.append($("<td></td>").html(item.type));
 			domRow.append($("<td></td>").html(item.title));
-			domRow.append($("<td></td>").html(item.occuring));
+			domRow.append($("<td></td>").html(item.occuring+' ('+item.next+')'));
 			domRow.append($("<td></td>").html(item.amount));
 
 			domRow.append(

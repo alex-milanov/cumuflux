@@ -11,6 +11,42 @@ cmf.resources.Transactions = function(url) {
 cmf.resources.Transactions.prototype = Object.create( iblokz.Resource.prototype );
 cmf.resources.Transactions.prototype.constructor = cmf.resources.Transactions;
 
+cmf.resources.Transactions.prototype.query = function(queryParams){
+	return iblokz.Resource.prototype.query.call(this, queryParams).then(function(result){
+		
+		result.list.forEach(function(item, index){
+			switch(item.occuring){
+				case 'monthly':
+					if(item.recurrence && item.recurrence.dayOfMonth){
+						item.next = moment().set('date', item.recurrence.dayOfMonth);
+						if(item.next < moment())
+							item.next.add(1, 'months');
+					}
+					break;
+				case 'weekly':
+					if(item.recurrence && item.recurrence.dayOfWeek){
+						item.next = moment().day(item.recurrence.dayOfWeek);
+						if(item.next < moment())
+							item.next.add(1, 'weeks');
+					}
+					break;
+				case 'daily':
+					item.next = moment().add(1,'days');
+					break;
+			}
+			// format it
+			if(item.next)
+				item.next = item.next.format("ll");
+			else
+				item.next = 'n/a';
+
+		})
+
+
+		return result;
+	})
+}
+
 cmf.resources.Transactions.prototype.preSave = function(data){
 
 	data.recurrence = {
@@ -46,8 +82,6 @@ cmf.resources.Transactions.prototype.view = function(id){
 		if(data['recurrence.startingAt']){
 			data['recurrence.startingAt'] = moment(data['recurrence.startingAt']).format("YYYY-MM-DD");
 		}
-
-		console.log(data);
 		return data;
 	})
 }
