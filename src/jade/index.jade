@@ -5,13 +5,23 @@ html
 		link(rel="stylesheet",href="css/style.css")
 	body
 
-		header
-			h1 CumuFlux - Personal Finances App
-			ul.main-menu
-				li: a(href="#/") Home
-				li.active: a(href="#/transactions") Transactions
-				li: a(href="#/projections") Projections
-		section.content
+		.gui
+			header
+				h1
+					i.fa.fa-credit-card
+					| CumuFlux
+				h2 Personal Finances App
+				ul#main-menu
+					li(rel="home"): a(href="#/")
+						i.fa.fa-home 
+						| Home
+					li(rel="transactions").active: a(href="#/transactions")
+						i.fa.fa-exchange 
+						| Transactions
+					li(rel="projections"): a(href="#/projections")
+						i.fa.fa-line-chart 
+						| Projections
+			section.content
 
 		//- lib
 		script(src="lib/jquery.js")

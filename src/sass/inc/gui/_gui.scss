@@ -1,0 +1,30 @@
+.gui {
+	> * {
+		position: absolute;
+		margin: 0px;
+		padding: 0px;
+	}
+	header {
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		width: 100%;
+		height: $cmf-header-height;
+		line-height: $cmf-header-height;
+		> * {
+			height: $cmf-header-height;
+			line-height: $cmf-header-height;
+			margin: 0px;
+			padding: 0px;
+			display: block;
+			float: left;
+		}
+	}
+	section.content {
+		top: $cmf-header-height;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		width: 100%;
+	}
+}

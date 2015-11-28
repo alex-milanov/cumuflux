@@ -1,8 +1,22 @@
 
 body {
 	font-family: $cmf-font;
+	padding: 0px;
+	margin: 0px;
 }
 
 button {
 	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.fa {
+	margin-right: 5pt;
 }

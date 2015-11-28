@@ -4,6 +4,17 @@ $(document).ready(function() {
 	var router = new iblokz.Router();
 	
 
+	router.addRouteChangeListener(function(url, urlChain){
+		console.log(url, urlChain);
+		$("#main-menu li").removeClass("active");
+		urlChain.forEach(function(urlNode){
+			if(urlNode == "/") // home
+				urlNode = "home"
+			if(["home","projections","transactions"].indexOf(urlNode) > -1){
+				$("#main-menu li[rel="+urlNode+"]").addClass("active");
+			}
+		})
+	});
 
 	router
 		.addRoute({
@@ -32,5 +43,6 @@ $(document).ready(function() {
 		})
 
 	router.init();
+
 
 });
