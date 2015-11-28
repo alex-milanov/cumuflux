@@ -24,8 +24,10 @@ cmf.elements.Projections.prototype.init = function(){
 		var thisMonthAmount = 0;
 		var nextMonthAmount = 0;
 
-		var nextWeekStart = moment().startOf('isoweek').add(1, 'weeks');
-		var nextWeekEnd = moment().endOf('isoweek').add(1, 'weeks');
+		var nextWeek = {
+			start: moment().startOf('isoweek').add(1, 'weeks'),
+			end: moment().endOf('isoweek').add(1, 'weeks')
+		}
 
 		var thisMonth =  {
 			start: moment().startOf("month"),
@@ -37,18 +39,35 @@ cmf.elements.Projections.prototype.init = function(){
 			end: thisMonth.end.clone().add(1, 'month')
 		}
 
+		function getOccurenceInMonth(isoWeekday, startOfMonth, endOfMonth){
+			var occurance = 0;
+			var date = startOfMonth.clone();
+			if(date.isoWeekday() > isoWeekday){
+				date.add(1, 'weeks').isoWeekday(isoWeekday);
+			} else {
+				date.isoWeekday(isoWeekday);
+			}
+			while(date < endOfMonth){
+				console.log(date.format());
+				occurance++;
+				date.add(1, 'weeks');
+			}
+			return occurance;
+		}
+
 		result.list.forEach(function(item){
+			console.log(item);
 			switch(item.occuring){
 				case "weekly":
-					if(item.next >= nextWeekStart && item.next <= nextWeekEnd){
+					if(item.occuredAt <= nextWeek.end){
 						nextWeekAmount += item.amount;
 					}
-					thisMonthAmount += item.amount*4;
-					nextMonthAmount += item.amount*4;
+					thisMonthAmount += item.amount * getOccurenceInMonth(item.recurrence.dayOfWeek, thisMonth.start, thisMonth.end);
+					nextMonthAmount += item.amount * getOccurenceInMonth(item.recurrence.dayOfWeek, nextMonth.start, nextMonth.end);
 					break;
 				case "monthly":
 					if(item.next) {
-						if(item.next >= nextWeekStart && item.next <= nextWeekEnd){
+						if(item.next >= nextWeek.start && item.next <= nextWeek.end){
 							nextWeekAmount += item.amount;
 						}
 						if(item.occuredAt <= thisMonth.end){
@@ -61,7 +80,7 @@ cmf.elements.Projections.prototype.init = function(){
 					break;
 				case "once":
 					if(item.occuredAt) {
-						if(item.occuredAt  >= nextWeekStart && item.occuredAt <= nextWeekEnd){
+						if(item.occuredAt  >= nextWeek.start && item.occuredAt <= nextWeek.end){
 							nextWeekAmount += item.amount;
 						}
 						if(item.occuredAt >= thisMonth.start && item.occuredAt < thisMonth.end){
